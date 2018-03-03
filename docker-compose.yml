@@ -3,6 +3,7 @@ services:
   db:
     image: mariadb:10.3
     environment:
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=notes
       - MYSQL_USER=notes
       - MYSQL_DATABASE=notes
