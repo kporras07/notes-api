@@ -1,0 +1,38 @@
+ahoyapi: v2
+usage: Docker commands for this site development using ahoy.
+commands:
+  help:
+    usage: Print this help
+    cmd: ahoy site --help
+  drop:
+    usage: Drop site
+    cmd: |
+        ahoy docker exec db "psql postgres  --username=gridiq --command='drop database gridiq;'"
+        ahoy docker exec db "psql postgres  --username=gridiq --command='create database gridiq;'"
+  install:
+    usage: Install site
+    cmd: |
+        ahoy docker exec db "psql postgres  --username=gridiq --command='drop database gridiq;'"
+        ahoy docker exec db "psql postgres  --username=gridiq --command='create database gridiq;'"
+        ahoy docker exec php php ./bin/console doctrine:migrations:migrate -n
+        ahoy docker exec php php ./bin/console gridiq:fixtures-load -n
+  install-demo:
+    usage: Install site for demos. Should be invoked with Demo name (ex. Demo1, Demo2)
+    cmd: |
+        ahoy docker exec db "psql postgres  --username=gridiq --command='drop database gridiq;'"
+        ahoy docker exec db "psql postgres  --username=gridiq --command='create database gridiq;'"
+        ahoy docker exec php php ./bin/console doctrine:migrations:migrate -n
+        ahoy docker exec php php "./bin/console gridiq:fixtures-load -n --namespace=\"App\\DataFixtures\\Base,App\\DataFixtures\\$@\""
+  test:
+    usage: Run functional tests
+    cmd: |
+        ahoy docker exec php "./bin/phpunit"
+  cache-clear:
+    usage: Cache clear
+    cmd: |
+        ahoy docker exec cli "php bin/console cache:clear && chmod 777 -R var/cache/dev"
+
+  console:
+    usage: Symfony Console
+    cmd: |
+        ahoy docker exec cli "php bin/console $@"
