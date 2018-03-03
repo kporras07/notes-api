@@ -1,0 +1,6 @@
+fos_user:
+  db_driver: orm
+  firewall_name: main
+  from_email:
+    address: "kporras07@gmail.com"
+    sender_name: "kporras07"
