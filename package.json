@@ -1,28 +1,13 @@
 {
-  "name": "gridiq",
-  "private": true,
-  "devDependencies": {
-    "@symfony/webpack-encore": "^0.17.1",
-    "bootstrap-sass": "^3.3.7",
-    "font-awesome": "^4.7.0",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-if": "^2.0.0",
-    "gulp-task-listing": "^1.0.1",
-    "gulp-util": "^3.0.1",
-    "minimist": "^1.2.0",
-    "node-sass": "^4.7.2",
-    "phplint": "^1.6.1",
-    "require-dir": "^0.3.0",
-    "sass-loader": "^6.0.6",
-    "sync-exec": "^0.6.2",
-    "through2": "^2.0.0",
-    "webpack-notifier": "^1.5.0"
-  },
-  "dependencies": {},
-  "scripts": {
-    "gulp": "gulp",
-    "test": "gulp phplint && gulp phpcs",
-    "encore": "encore"
-  }
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.17.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production"
+    }
 }
