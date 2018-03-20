@@ -19,11 +19,21 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user")
+     */
+    protected $notes;
+
+    /**
      * Get the value of Id
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getNotes()
+    {
+      return $this->notes;
     }
 }
