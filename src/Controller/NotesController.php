@@ -35,16 +35,8 @@ class NotesController extends FOSRestController
      * Notes Index.
      *
      * @SWG\Get(
-     *     path="/api/notes",
-     *     summary="Notes index",
-     *     description="Gets all notes",
      *     security={{"bearer":{}}},
-     *     @SWG\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         type="integer",
-     *         description="The user id to retrieve notes"
-     *     ),
+     *     @SWG\Tag(name="Notes"),
      *     @SWG\Response(
      *         response=200,
      *         description="Successful",
@@ -52,6 +44,12 @@ class NotesController extends FOSRestController
      *             type="array",
      *             @Model(type=Note::class)
      *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         type="integer",
+     *         description="The user id to retrieve notes"
      *     )
      * )
      */
