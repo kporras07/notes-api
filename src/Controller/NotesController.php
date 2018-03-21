@@ -77,4 +77,54 @@ class NotesController extends FOSRestController
       $view = $this->view($notes, 200);
       return $this->handleView($view);
     }
+
+    /**
+     * Notes POST.
+     *
+     * @SWG\Post(
+     *     security={{"bearer":{}}},
+     *     tags={"Notes"},
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Successful",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @Model(type=Note::class)
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="note",
+     *         in="body",
+     *         description="The note to create",
+     *         type="Note::class",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="title",
+     *                 description="Note's title",
+     *                 type="string",
+     *             ),
+     *             @SWG\Property(
+     *                 property="body",
+     *                 description="Note's body",
+     *                 type="string",
+     *             )
+     *         )
+     *     )
+     * )
+     */
+    public function postNotesAction(Request $request)
+    {
+      $title = $request->get('title');
+      $body = $request->get('body');
+      $note = new Note();
+      $note->setTitle($title);
+      $note->setBody($body);
+      $note->setUser($this->getUser());
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($note);
+      $em->flush();
+
+      $view = $this->view($note, 201);
+      return $this->handleView($view);
+    }
 }
