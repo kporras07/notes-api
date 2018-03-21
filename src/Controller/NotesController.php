@@ -56,6 +56,18 @@ class NotesController extends FOSRestController
     public function getNotesAction(Request $request)
     {
       $notes = [];
+      $user = $this->getUser();
+      if (!$user->hasRole('ROLE_ADMIN')) {
+        if (empty($request->get('user_id'))) {
+          // Only admin can send request without user_id.
+          throw $this->createAccessDeniedException('Unauthorized to see all notes.');
+        }
+        elseif ($request->get('user_id') != $user->getId()) {
+          // Non admin users can only see own notes.
+          throw $this->createAccessDeniedException('Unauthorized to see notes from other users.');
+        }
+      }
+
       if ($request->get('user_id')) {
         $notes = $this->noteRepository->findBy(['user' => $request->get('user_id')]);
       }
