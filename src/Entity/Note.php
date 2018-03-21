@@ -23,6 +23,11 @@ class Note
     protected $user;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $title;
+
+    /**
      * @ORM\Column(type="text")
      */
     protected $body;
@@ -47,6 +52,16 @@ class Note
       $this->user = $user;
     }
 
+    public function getTitle()
+    {
+      return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+      $this->title = $title;
+    }
+
     public function getBody()
     {
       return $this->body;
@@ -69,6 +84,6 @@ class Note
 
     public function __toString()
     {
-      return (string) $this->getId();
+      return (string) $this->getTitle();
     }
 }
