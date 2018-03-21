@@ -1,0 +1,14 @@
+lexik_jwt_authentication:
+    private_key_path: '%kernel.project_dir%/%env(JWT_PRIVATE_KEY_PATH)%'
+    public_key_path:  '%kernel.project_dir%/%env(JWT_PUBLIC_KEY_PATH)%'
+    pass_phrase:      '%env(JWT_PASSPHRASE)%'
+    token_ttl:        '%env(JWT_TTL)%'
+    # token extraction settings
+    token_extractors:
+        authorization_header:
+            enabled: true
+            prefix:  Bearer
+            name:    Authorization
+        query_parameter:
+            enabled: true
+            name:    bearer

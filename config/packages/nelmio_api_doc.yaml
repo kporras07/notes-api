@@ -4,6 +4,11 @@ nelmio_api_doc:
             title: Notes API
             description: This is an awesome notes app!
             version: 1.0.0
-    routes: # to filter documented routes
+        securityDefinitions:
+            bearer:
+                type: apiKey
+                name: Authorization
+                in: header
+    areas: # to filter documented routes
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

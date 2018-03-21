@@ -4,3 +4,5 @@
 notes:
   type: rest
   resource: App\Controller\NotesController
+api_login_check:
+  path: /api/login_check

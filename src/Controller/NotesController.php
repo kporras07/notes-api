@@ -17,6 +17,7 @@ use Swagger\Annotations as SWG;
  */
 class NotesController extends FOSRestController
 {
+
     /**
      * Note Repository.
      */
@@ -33,21 +34,26 @@ class NotesController extends FOSRestController
     /**
      * Notes Index.
      *
-     * @SWG\Response(
-     *     response=200,
-     *     description="Notes index",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @Model(type=Note::class)
+     * @SWG\Get(
+     *     path="/api/notes",
+     *     summary="Notes index",
+     *     description="Gets all notes",
+     *     security={{"bearer":{}}},
+     *     @SWG\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         type="integer",
+     *         description="The user id to retrieve notes"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @Model(type=Note::class)
+     *         )
      *     )
      * )
-     * @SWG\Parameter(
-     *     name="user_id",
-     *     in="query",
-     *     type="integer",
-     *     description="The user id to retrieve notes"
-     * )
-     * @SWG\Tag(name="notes")
      */
     public function getNotesAction(Request $request)
     {
