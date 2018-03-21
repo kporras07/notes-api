@@ -36,7 +36,7 @@ class NotesController extends FOSRestController
      *
      * @SWG\Get(
      *     security={{"bearer":{}}},
-     *     @SWG\Tag(name="Notes"),
+     *     tags={"Notes"},
      *     @SWG\Response(
      *         response=200,
      *         description="Successful",
