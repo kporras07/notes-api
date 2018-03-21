@@ -9,8 +9,6 @@ nelmio_api_doc:
                 type: apiKey
                 name: Authorization
                 in: header
-        security:
-            - bearer: []
     areas: # to filter documented routes
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
