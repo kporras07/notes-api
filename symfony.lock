@@ -143,6 +143,9 @@
             "ref": "d76d09603a98c2e2b78ef038ef8a961f51b86da0"
         }
     },
+    "nikic/php-parser": {
+        "version": "v4.0.0"
+    },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
