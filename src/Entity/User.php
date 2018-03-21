@@ -23,6 +23,11 @@ class User extends BaseUser
      */
     protected $notes;
 
+    public function __construct()
+    {
+      $this->notes = [];
+    }
+
     /**
      * Get the value of Id
      * @return mixed
