@@ -41,4 +41,14 @@ class User extends BaseUser
     {
       return $this->notes;
     }
+
+    public function hasRole($role_name)
+    {
+      foreach ($this->getRoles() as $role) {
+        if ($role === $role_name) {
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }
 }
