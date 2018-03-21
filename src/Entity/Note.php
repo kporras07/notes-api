@@ -66,4 +66,9 @@ class Note
     {
       $this->tags = $tags;
     }
+
+    public function __toString()
+    {
+      return (string) $this->getId();
+    }
 }
