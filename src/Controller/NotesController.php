@@ -79,6 +79,48 @@ class NotesController extends FOSRestController
     }
 
     /**
+     * Notes Retrieve.
+     *
+     * @SWG\Get(
+     *     security={{"bearer":{}}},
+     *     tags={"Notes"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @Model(type=Note::class)
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="note_id",
+     *         in="path",
+     *         type="integer",
+     *         description="The note id to retrieve"
+     *     )
+     * )
+     */
+    public function getNoteAction($note_id)
+    {
+      $notes = [];
+      $user = $this->getUser();
+      $note = $this->noteRepository->find($note_id);
+      if (empty($note)) {
+          // Note not found.
+          throw $this->createNotFoundException('Note not found.');
+      }
+      if (!$user->hasRole('ROLE_ADMIN')) {
+        if ($note->getUser()->getId() != $user->getId()) {
+          // Only admin can see all notes.
+          throw $this->createAccessDeniedException('Unauthorized to see this note.');
+        }
+      }
+
+      $view = $this->view($note, 200);
+      return $this->handleView($view);
+    }
+
+    /**
      * Notes POST.
      *
      * @SWG\Post(
