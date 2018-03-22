@@ -246,4 +246,48 @@ class NotesController extends FOSRestController
       $view = $this->view($note, $response_code);
       return $this->handleView($view);
     }
+
+    /**
+     * Notes Delete.
+     *
+     * @SWG\Delete(
+     *     security={{"bearer":{}}},
+     *     tags={"Notes"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @Model(type=Note::class)
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="note_id",
+     *         in="path",
+     *         type="integer",
+     *         description="The note id to delete"
+     *     )
+     * )
+     */
+    public function deleteNoteAction($note_id)
+    {
+      $user = $this->getUser();
+      $note = $this->noteRepository->find($note_id);
+      if (empty($note)) {
+          // Note not found.
+          throw $this->createNotFoundException('Note not found.');
+      }
+      if (!$user->hasRole('ROLE_ADMIN')) {
+        if ($note->getUser()->getId() != $user->getId()) {
+          // Only admin can delete all notes.
+          throw $this->createAccessDeniedException('Unauthorized to delete this note.');
+        }
+      }
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($note);
+      $em->flush();
+
+      $view = $this->view($note, 200);
+      return $this->handleView($view);
+    }
 }
