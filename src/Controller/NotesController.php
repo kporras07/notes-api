@@ -102,7 +102,6 @@ class NotesController extends FOSRestController
      */
     public function getNoteAction($note_id)
     {
-      $notes = [];
       $user = $this->getUser();
       $note = $this->noteRepository->find($note_id);
       if (empty($note)) {
